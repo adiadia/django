@@ -5,6 +5,54 @@ from django.contrib import messages
 from django.db.models import Q
 from .forms import PostModalForm
 from .models import PostModel
+from django.views.generic.base import TemplateView
+from django.utils.decorators import method_decorator
+from django.views.generic import DetailView
+from django.views.generic.list import ListView
+
+class LoginRequired(object):
+    # @classmethod
+    # def as_view(cls,**kwargs):
+    #     view=super(LoginRequired,cls).as_view(**kwargs)
+    #     return login_required(view)
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(LoginRequired,self).dispatch(request,*args,**kwargs)
+
+class PostList(ListView):
+    model = PostModel
+
+class PostDetail(DetailView):
+    model = PostModel
+
+class DashboardTemplateView(LoginRequired,TemplateView):
+    template_name = 'blog/about.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        return super(DashboardTemplateView,self).dispatch(request,*args,**kwargs)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def post_create(request):
