@@ -3,11 +3,14 @@ from .models import PostModel
 
 
 class SearchForm(forms.Form):
-    charfield=forms.CharField()
-    integerfield=forms.IntegerField()
-    boolenfield=forms.BooleanField()
-    emailfield=forms.EmailField()
-    decimalfield=forms.DecimalField()
+    model=PostModel
+    # fields=[]
+    exclude=[]
+    # charfield=forms.CharField()
+    # integerfield=forms.IntegerField(label='Test')
+    # boolenfield=forms.BooleanField()
+    # emailfield=forms.EmailField(initial='Aditya')
+    # decimalfield=forms.DecimalField(initial=123)
 
     def clean_integerfield(self,*args,**kwargs):
         integerfield=self.cleaned_data.get("integerfield")

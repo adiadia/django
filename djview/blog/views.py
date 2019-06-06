@@ -15,7 +15,12 @@ from django.core.exceptions import MultipleObjectsReturned
 
 
 def post_create(request):
-    form=PostModalForm(request.POST or None)
+    initial_value={
+        'charfield':'Aditya',
+        'integerfield':123,
+        'boolenfield':True,
+    }
+    form=PostModalForm(request.POST or None,initial=initial_value)
     context = {'form': form}
     if form.is_valid():
         obj=form.save(commit=False)
